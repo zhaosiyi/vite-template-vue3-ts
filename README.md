@@ -99,7 +99,7 @@ npm i -D prettier
 ```jsonc
 {
   "endOfLine": "auto", // 保留源文件的换行格式
-  "simi": true, // 在语句末尾添加分号
+  "semi": true, // 在语句末尾添加分号
   "singleQuote": true, // 尽量使用单引号
   "tabWidth": 2 // 控制 Tab 长度为 2 个空格
 }
@@ -114,41 +114,15 @@ npm i -D prettier
 }
 ```
 
-如果希望仅在特定类型的文件中开启 Prettier 的自动格式化功能，可以类似这样进行设置：
+如果有不希望 Prettier 进行格式化的文件，可以在项目根目录创建一个 `.prettierignore` 文件，像 `.gitignore` 那样设置 Prettier 忽略的文件：
 
-```jsonc
-{
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  }
-}
+```
+node_modules
+dist
+```
+
+如果希望一次性格式化项目中的所有文件（ `.prettierignore` 中的文件除外），可以执行：
+
+```sh
+npx prettier --write .
 ```
