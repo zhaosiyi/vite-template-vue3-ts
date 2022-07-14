@@ -2,7 +2,7 @@
 
 本项目为自己常用的 Vite + Vue3 + TS 项目模板，整合了以下内容：
 
-- [x] Prettier
+- [x] [Prettier](https://github.com/prettier/prettier)
 - [ ] SASS
 - [ ] PostCSS
 - [ ] ESLint
@@ -76,7 +76,7 @@ export default defineConfig({
 ## 安装 [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.zh.md) 类型库
 
 当没有安装 Node 的 TypeScript 类型库时，可能会出现 ts 无法识别 `path` 和 `__dirname` 等名称的问题。
-可以安装相应的类型库来解决问题：
+可以通过安装 `@types/node` 类型库来解决问题：
 
 ```sh
 npm i -D @types/node
@@ -118,7 +118,7 @@ export default defineConfig({
 });
 ```
 
-## 引入 [Prettier](https://github.com/prettier/prettier)
+## 引入 Prettier
 
 该工具用于格式化代码，保证项目代码风格统一。
 首先安装 Prettier：
@@ -158,4 +158,47 @@ dist
 
 ```sh
 npx prettier --write .
+```
+
+## 引入 SASS
+
+Vite 原生支持 SASS，我们仅需安装 `SASS` 库就可直接 `import 'xxx.scss'` 或者在 `.vue` 文件中使用 `<style lang="scss">`：
+
+```sh
+npm i -D sass
+```
+
+在 `vite.config.js` 中可以配置 SASS 的全局代码，常用于引入全局变量等内容：
+
+```ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: { '/@': path.resolve(__dirname, 'src') },
+  },
+  server: { open: true },
+  build: {
+    assetsDir: 'static',
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/name-[hash].[ext]',
+      },
+    },
+  },
+  // 新增代码
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import '/@/styles/global.scss';`, // 引入 scss 全局变量
+      },
+    },
+  },
+});
 ```
