@@ -14,6 +14,7 @@
 ## 初始化 Vite 项目和 git 仓库
 
 初始化 Vite 项目：
+
 ```sh
 npm init vite@latest
 ```
@@ -23,11 +24,13 @@ npm init vite@latest
 - `Select a variant: » vue-ts`
 
 然后安装依赖库：
+
 ```sh
 npm i
 ```
 
 最后初始化 git 仓库并提交：
+
 ```sh
 git init
 git add *
@@ -40,7 +43,8 @@ git push -u origin master
 
 ## 配置 `/@` 路径别名
 
-在 `vite.config.js` 中添加以下内容：
+在 `vite.config.js` 中添加以下内容即可完成路径别名 `/@` 的配置：
+
 ```ts
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -54,4 +58,19 @@ export default defineConfig({
   },
 });
 ```
+
+然后为了让 VSCode 中的 [Path Intellisense](https://github.com/ChristianKohler/PathIntellisense) 插件也能识别路径别名，需要在 `.vscode` 文件夹下新建 `settings.json` 文件，并添加以下内容：
+
+```json
+{
+  "path-intellisense.autoTriggerNextSuggestion": true, // 在补全后自动弹出下一条补全建议
+  "path-intellisense.extensionOnImport": true, // 为补全的文件添加后缀名
+  "path-intellisense.mappings": {
+    "/@": "${workspaceRoot}/src" // 如果 vite 或 webpack 等构建工具配置了路径别名，需要在这里也同时设置，不然插件无法识别这些别名
+  } 
+}
+```
+
+之后 VSCode 就可以识别 `/@` 别名并给出正确的路径补全提示。
+
 

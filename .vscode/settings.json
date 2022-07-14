@@ -1,0 +1,7 @@
+{
+  "path-intellisense.autoTriggerNextSuggestion": true,
+  "path-intellisense.extensionOnImport": true,
+  "path-intellisense.mappings": {
+    "/@": "${workspaceRoot}/src",
+  } 
+}
