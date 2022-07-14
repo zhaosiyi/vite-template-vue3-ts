@@ -4,7 +4,7 @@
 
 - [x] [Prettier](https://github.com/prettier/prettier)
 - [x] [SASS](https://github.com/sass)
-- [ ] PostCSS
+- [x] [PostCSS](https://github.com/postcss/postcss)
 - [ ] ESLint
 - [ ] StyleLint
 
@@ -256,5 +256,112 @@ export default defineConfig({
 ```jsonc
 {
   "browserlists": ["defaults"] // 添加这行代码
+}
+```
+
+## 引入 ESLint
+
+ESLint 用于检查脚本代码的潜在错误。
+首先安装 ESLint：
+
+```sh
+npm i -D eslint
+```
+
+然后执行以下命令初始化 ESLint 的配置文件：
+
+```sh
+npx eslint --init
+```
+
+该命令询问的选项按以下选择：
+
+- `How would you like to use ESLint?`：`To check syntax and find problems`
+- `What type of modules does your project use?`：`JavaScript modules (import/export)`
+- `Which framework does your project use?`：`Vue.js`
+- `Does your project use TypeScript?`：`Yes`
+- `Where does your code run?`：`Browser`
+- `What format do you want your config file to be in?`：`JSON`
+
+安装上述选项 ESLint 将会安装以下依赖库：
+
+- `eslint-plugin-vue@latest`
+- `@typescript-eslint/eslint-plugin@latest`
+- `@typescript-eslint/parser@latest`
+
+命令执行完后会生成一个 `.eslintrc.json` 配置文件，我们还需对其进行一定更改。
+
+首先添加 `parser` 字段，来支持 ESLint 对 `.vue` 文件的解析：
+
+```jsonc
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "vue-eslint-parser", // 新增代码
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["vue", "@typescript-eslint"],
+  "rules": {}
+}
+```
+
+然后为了避免 Prettier 格式化代码的规则与 ESLint 的检查规则发生冲突，还需安装以下插件：
+
+```sh
+npm i -D eslint-plugin-prettier eslint-config-prettier
+```
+
+安装后修改 `.eslintrc.json` 文件引入这些插件：
+
+```jsonc
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended" // 新增代码
+  ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["vue", "@typescript-eslint"],
+  "rules": {
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }] // 新增代码
+  }
+}
+```
+
+最后需要在 `settings.json` 中添加相关配置以支持 [ESLint 的 VSCode 插件](https://github.com/Microsoft/vscode-eslint) 正常工作：
+
+```jsonc
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": false, // 新增代码，不使用 ESLint 进行格式化，而是使用 Prettier
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true // 新增代码，在保存时尝试自动修复 ESLint 报错的内容
+  },
+  "path-intellisense.autoTriggerNextSuggestion": true,
+  "path-intellisense.extensionOnImport": true,
+  "path-intellisense.mappings": {
+    "/@": "${workspaceRoot}/src"
+  }
 }
 ```
