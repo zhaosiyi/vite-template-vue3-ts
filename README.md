@@ -2,7 +2,7 @@
 
 本项目为自己常用的 Vite + Vue3 + TS 项目模板，整合了以下内容：
 
-- [ ] Prettier
+- [x] Prettier
 - [ ] SASS
 - [ ] PostCSS
 - [ ] ESLint
@@ -75,7 +75,8 @@ export default defineConfig({
 
 ## 安装 [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.zh.md) 类型库
 
-出现 ts 无法识别 `path` 和 `__dirname` 这样的 Node 内置名称等问题时，安装这个库可以解决问题：
+当没有安装 Node 的 TypeScript 类型库时，可能会出现 ts 无法识别 `path` 和 `__dirname` 等名称的问题。
+可以安装相应的类型库来解决问题：
 
 ```sh
 npm i -D @types/node
@@ -83,7 +84,39 @@ npm i -D @types/node
 
 ## `vite.config.js` 的其他配置
 
-TODO
+这里主要在 `vite.config.js` 中添加了以下内容：
+
+- 设置 `server` 选项来让 Vite 在启动服务器时自动在浏览器中打开页面。
+- 设置 `build` 选项来自定义 Vite 打包项目的结构。
+
+修改后的 `vite.config.js` 内容如下：
+
+```ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: { '/@': path.resolve(__dirname, 'src') },
+  },
+  server: {
+    open: true, // 启动后自动在浏览器打开页面
+  },
+  build: {
+    assetsDir: 'static', // 静态资源的存放路径
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js', // js 文件的存放位置
+        entryFileNames: 'static/js/[name]-[hash].js', // js 入口文件的存放位置
+        assetFileNames: 'static/[ext]/name-[hash].[ext]', // 其他资源的存放位置
+      },
+    },
+  },
+});
+```
 
 ## 引入 [Prettier](https://github.com/prettier/prettier)
 
