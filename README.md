@@ -3,7 +3,7 @@
 本项目为自己常用的 Vite + Vue3 + TS 项目模板，整合了以下内容：
 
 - [x] [Prettier](https://github.com/prettier/prettier)
-- [ ] SASS
+- [x] [SASS](https://github.com/sass)
 - [ ] PostCSS
 - [ ] ESLint
 - [ ] StyleLint
@@ -201,4 +201,60 @@ export default defineConfig({
     },
   },
 });
+```
+
+## 配置 PostCSS
+
+Vite 内置了 PostCSS，所以无需安装 PostCSS 本体，直接安装插件并进行配置即可。
+这里仅使用了 [postcss-preset-env](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env) 插件，用于提供 CSS 特性的 polyfills 和部分属性的浏览器前缀。
+
+首先安装这个插件：
+
+```sh
+npm i -D postcss-preset-env
+```
+
+然后在 `vite.config.js` 中进行配置：
+
+```ts
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import postcssPresetEnv from 'postcss-preset-env';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: { '/@': path.resolve(__dirname, 'src') },
+  },
+  server: { open: true },
+  build: {
+    assetsDir: 'static',
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/name-[hash].[ext]',
+      },
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: { additionalData: `@import '/@/styles/global.scss';` },
+    },
+    // 新增代码
+    postcss: {
+      plugins: [postcssPresetEnv], // 用于添加 polyfills 和属性前缀
+    },
+  },
+});
+```
+
+最后还需在 `package.json` 中添加 `browserlists` 选项来告知插件浏览器环境：
+
+```jsonc
+{
+  "browserlists": ["defaults"] // 添加这行代码
+}
 ```
