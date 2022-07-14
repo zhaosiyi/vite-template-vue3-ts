@@ -61,7 +61,7 @@ export default defineConfig({
 
 然后为了让 VSCode 中的 [Path Intellisense](https://github.com/ChristianKohler/PathIntellisense) 插件也能识别路径别名，需要在 `.vscode` 文件夹下新建 `settings.json` 文件，并添加以下内容：
 
-```json
+```jsonc
 {
   "path-intellisense.autoTriggerNextSuggestion": true, // 在补全后自动弹出下一条补全建议
   "path-intellisense.extensionOnImport": true, // 为补全的文件添加后缀名
@@ -72,5 +72,13 @@ export default defineConfig({
 ```
 
 之后 VSCode 就可以识别 `/@` 别名并给出正确的路径补全提示。
+
+## 安装 [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/README.zh.md) 类型库
+
+出现 ts 无法识别 `path` 和 `__dirname` 这样的 Node 内置名称等问题时，安装这个库可以解决问题：
+
+```sh
+npm i -D @types/node
+```
 
 
