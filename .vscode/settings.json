@@ -1,7 +1,9 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "path-intellisense.autoTriggerNextSuggestion": true,
   "path-intellisense.extensionOnImport": true,
   "path-intellisense.mappings": {
-    "/@": "${workspaceRoot}/src",
-  } 
+    "/@": "${workspaceRoot}/src"
+  }
 }

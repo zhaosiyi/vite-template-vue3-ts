@@ -8,7 +8,6 @@
 - [ ] ESLint
 - [ ] StyleLint
 
-
 下面会记录项目配置的具体过程。
 
 ## 初始化 Vite 项目和 git 仓库
@@ -20,6 +19,7 @@ npm init vite@latest
 ```
 
 其中 Vite 询问的选项选择如下：
+
 - `Select a framework: » vue`
 - `Select a variant: » vue-ts`
 
@@ -67,7 +67,7 @@ export default defineConfig({
   "path-intellisense.extensionOnImport": true, // 为补全的文件添加后缀名
   "path-intellisense.mappings": {
     "/@": "${workspaceRoot}/src" // 如果 vite 或 webpack 等构建工具配置了路径别名，需要在这里也同时设置，不然插件无法识别这些别名
-  } 
+  }
 }
 ```
 
@@ -81,4 +81,74 @@ export default defineConfig({
 npm i -D @types/node
 ```
 
+## `vite.config.js` 的其他配置
 
+TODO
+
+## 引入 [Prettier](https://github.com/prettier/prettier)
+
+该工具用于格式化代码，保证项目代码风格统一。
+首先安装 Prettier：
+
+```sh
+npm i -D prettier
+```
+
+然后在根目录创建 Prettier 的配置文件 `.prettierrc`，并添加以下内容：
+
+```jsonc
+{
+  "endOfLine": "auto", // 保留源文件的换行格式
+  "simi": true, // 在语句末尾添加分号
+  "singleQuote": true, // 尽量使用单引号
+  "tabWidth": 2 // 控制 Tab 长度为 2 个空格
+}
+```
+
+为了让 [Prettier 的 VSCode 插件](https://github.com/prettier/prettier-vscode) 支持在保存时自动格式化的功能，在 `settings.json` 中添加以下内容：
+
+```jsonc
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 将默认的格式化工具设置为 Prettier
+  "editor.formatOnSave": true // 在保存时自动格式化代码
+}
+```
+
+如果希望仅在特定类型的文件中开启 Prettier 的自动格式化功能，可以类似这样进行设置：
+
+```jsonc
+{
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
+```
