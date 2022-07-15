@@ -7,7 +7,7 @@
     "eslint:recommended",
     "plugin:vue/vue3-essential",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended" // 新增代码
+    "plugin:prettier/recommended"
   ],
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -17,6 +17,6 @@
   },
   "plugins": ["vue", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }] // 新增代码
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }]
   }
 }

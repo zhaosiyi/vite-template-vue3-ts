@@ -5,8 +5,8 @@
 - [x] [Prettier](https://github.com/prettier/prettier)
 - [x] [SASS](https://github.com/sass)
 - [x] [PostCSS](https://github.com/postcss/postcss)
-- [ ] ESLint
-- [ ] StyleLint
+- [x] [ESLint](https://github.com/eslint/eslint)
+- [ ] [StyleLint](https://github.com/stylelint/stylelint)
 
 下面会记录项目配置的具体过程。
 
@@ -364,4 +364,11 @@ npm i -D eslint-plugin-prettier eslint-config-prettier
     "/@": "${workspaceRoot}/src"
   }
 }
+```
+
+另外还需添加 `.eslintignore` 文件用于设置忽略的文件：
+
+```
+node_modules
+dist
 ```
