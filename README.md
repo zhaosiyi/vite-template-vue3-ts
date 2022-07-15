@@ -395,3 +395,32 @@ npm i -D postcss-html stylelint-config-standard-vue
 npm i -D stylelint-order stylelint-config-rational-order
 npm i -D stylelint-config-prettier
 ```
+
+然后类似 ESLint 和 Git，添加 `.stylelintignore` 文件：
+
+```
+node_modules
+dist
+```
+
+最后在 `settings.json` 中配置 StyleLint 的 VSCode 插件：
+
+```jsonc
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": false,
+  "stylelint.validate": ["css", "postcss", "scss", "vue"], // 新增代码，设置 StyleLint 生效的文件类型
+  "css.validate": false, // 新增代码，关闭 VSCode 自身的样式检查
+  "scss.validate": false, // 新增代码，关闭 VSCode 自身的样式检查
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true // 新增代码，在保存时修复 StyleLint 报错
+  },
+  "path-intellisense.autoTriggerNextSuggestion": true,
+  "path-intellisense.extensionOnImport": true,
+  "path-intellisense.mappings": {
+    "/@": "${workspaceRoot}/src"
+  }
+}
+```
