@@ -381,3 +381,17 @@ ESLint 用于检查脚本代码，而 StyleLint 用于检查样式代码。
 ```sh
 npm i -D stylelint
 ```
+
+然后安装 StyleLint 的几个常用插件：
+
+- [stylelint-config-standard-scss](https://github.com/stylelint-scss/stylelint-config-standard-scss)：用于解析 `.scss` 文件并引入相关规则。
+- [stylelint-config-standard-vue](https://github.com/ota-meshi/stylelint-config-standard-vue)：用于支持 `.vue` 文件的解析并引入相关规则。
+- [stylelint-config-rational-order](https://github.com/constverum/stylelint-config-rational-order)：用于支持 CSS 属性排序功能。
+- [stylelint-config-prettier](https://github.com/prettier/stylelint-config-prettier)：用于解决和 Prettier 的冲突。
+
+```sh
+npm i -D stylelint-config-standard-scss
+npm i -D postcss-html stylelint-config-standard-vue
+npm i -D stylelint-order stylelint-config-rational-order
+npm i -D stylelint-config-prettier
+```
