@@ -6,7 +6,8 @@
 - [x] [SASS](https://github.com/sass)
 - [x] [PostCSS](https://github.com/postcss/postcss)
 - [x] [ESLint](https://github.com/eslint/eslint)
-- [ ] [StyleLint](https://github.com/stylelint/stylelint)
+- [x] [StyleLint](https://github.com/stylelint/stylelint)
+- [x] [VueRouter](https://github.com/vuejs/router)
 
 下面会记录项目配置的具体过程。
 
@@ -449,4 +450,12 @@ npx stylelint "**/*.{css,scss,vue}" --fix
     "VisualStudioExptTeam.vscodeintellicode"
   ]
 }
+```
+
+## 引入 vue-VueRouter
+
+直接安装即可使用：
+
+```sh
+npm install vue-router@4
 ```
