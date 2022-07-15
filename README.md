@@ -372,3 +372,12 @@ npm i -D eslint-plugin-prettier eslint-config-prettier
 node_modules
 dist
 ```
+
+## 引入 stylelint
+
+ESLint 用于检查脚本代码，而 StyleLint 用于检查样式代码。
+首先安装 StyleLint：
+
+```sh
+npm i -D stylelint
+```
