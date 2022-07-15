@@ -430,3 +430,23 @@ dist
 ```sh
 npx stylelint "**/*.{css,scss,vue}" --fix
 ```
+
+## 配置 VSCode 插件列表
+
+修改 `.vscode` 文件夹中的 `extensions.json` 文件，来设置项目建议的 VSCode 插件：
+
+```jsonc
+{
+  "recommendations": [
+    "Vue.volar",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ]
+}
+```
